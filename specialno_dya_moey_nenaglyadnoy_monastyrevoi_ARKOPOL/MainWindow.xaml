@@ -1,0 +1,20 @@
+﻿<Window x:Class="specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="Авторизация" HorizontalAlignment="Center" Margin="0,379,0,0" VerticalAlignment="Top" Height="31" Width="126" Name="au_btn" Click="au_btn_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="89,112,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="159,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="login_tbx"/>
+        <TextBlock HorizontalAlignment="Left" Margin="89,176,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="159,175,0,0" VerticalAlignment="Top" Width="120" Name="password_pbx"/>
+        <Image Source="/image/2m4xTON6RDY.jpg" Margin="312,-2,126,217" />
+        <Image Source="/image/453_original.jpg" Margin="328,175,235,179" />
+        <Image Source="/image/agentstvo-nedvizhimosti-heops.jpg" Margin="443,176,1,146" />
+        <Image Source="/image/scale_1200.png" Margin="543,307,63,24" />
+    </Grid>
+</Window>

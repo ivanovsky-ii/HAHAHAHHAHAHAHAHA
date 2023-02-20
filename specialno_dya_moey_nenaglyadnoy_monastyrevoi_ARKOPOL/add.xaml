@@ -1,0 +1,65 @@
+﻿<Window x:Class="specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL.add"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL"
+        mc:Ignorable="d"
+        Title="add" Height="450" Width="800">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Margin="192,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="floor_tb"/>
+        <TextBox HorizontalAlignment="Left" Margin="192,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="floor_apat_tb"/>
+        <TextBox HorizontalAlignment="Left" Margin="192,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="amount_rooms_tb"/>
+        <TextBox HorizontalAlignment="Left" Margin="192,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="amount_toilet_tb"/>
+        <TextBox HorizontalAlignment="Left" Margin="192,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Name="cad_price_tb"/>
+        <TextBox HorizontalAlignment="Left" Margin="192,246,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Name="market_price_tb"/>
+        <TextBox HorizontalAlignment="Left" Margin="192,282,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Name="rent_price_tb"/>
+
+
+
+        <TextBlock HorizontalAlignment="Left" Margin="54,68,0,0" TextWrapping="Wrap" Text="этажность здания" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,98,0,0" TextWrapping="Wrap" Text="этаж" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,135,0,0" TextWrapping="Wrap" Text="количество комнат" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,171,0,0" TextWrapping="Wrap" Text="количество туалетов" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,204,0,0" TextWrapping="Wrap" Text="кадастровая стоимость" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,246,0,0" TextWrapping="Wrap" Text="рыночная стоимость" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,278,0,0" TextWrapping="Wrap" Text="стоимость аренды" VerticalAlignment="Top"/>
+
+
+
+        <DatePicker HorizontalAlignment="Left" Margin="641,64,0,0" VerticalAlignment="Top" Name="ya_kalendar"/>
+        <ComboBox HorizontalAlignment="Left" Margin="641,102,0,0" VerticalAlignment="Top" Width="120" Name="winplace_cb">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox HorizontalAlignment="Left" Margin="641,141,0,0" VerticalAlignment="Top" Width="120" Name="toitype_cb">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox HorizontalAlignment="Left" Margin="641,179,0,0" VerticalAlignment="Top" Width="120" Name="flat_status">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <CheckBox Content="Есть ли кодиционер" HorizontalAlignment="Left" Margin="641,243,0,0" VerticalAlignment="Top" Name="conditer_chb"/>
+        <TextBlock HorizontalAlignment="Left" Margin="526,105,0,0" TextWrapping="Wrap" Text="Расположение окна" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="574,144,0,0" TextWrapping="Wrap" Text="тип туалета" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="545,182,0,0" TextWrapping="Wrap" Text="Статус квартиры" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="566,68,0,0" TextWrapping="Wrap" Text="Дата аренды" VerticalAlignment="Top"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Margin="423,347,0,0" VerticalAlignment="Top" Height="40" Width="131" Name="add_new_record_button" Click="add_new_record_button_Click"/>
+        <Button Content="Просмотр отчёта" HorizontalAlignment="Left" Margin="610,347,0,0" VerticalAlignment="Top" Height="40" Width="131" Name="go_to_view_btn" Click="go_to_view_btn_Click"/>
+
+
+
+
+
+    </Grid>
+</Window>

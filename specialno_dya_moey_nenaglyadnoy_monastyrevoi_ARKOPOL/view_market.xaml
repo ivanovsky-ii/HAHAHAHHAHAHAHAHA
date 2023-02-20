@@ -1,0 +1,40 @@
+﻿<Window x:Class="specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL.view_market"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL"
+        mc:Ignorable="d"
+        Title="view_market" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ListView Name="view_market_agent"
+                  SelectionChanged="view_market_agent_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="номер квартиры" DisplayMemberBinding="{Binding id}"/>
+                    <GridViewColumn Header="дата сдачи/оосвобождения" DisplayMemberBinding="{Binding date_build}"/>
+                    <GridViewColumn Header="статус квартиры" DisplayMemberBinding="{Binding status.name}"/>
+                    <GridViewColumn Header="кадастровая стоимость" DisplayMemberBinding="{Binding cad_price}"/>
+                    <GridViewColumn Header="рыночная стоимость" DisplayMemberBinding="{Binding market_price}"/>
+                    <GridViewColumn Header="стоимость аренды" DisplayMemberBinding="{Binding rent_price}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="назад" Name="back_btn" Click="back_btn_Click" HorizontalAlignment="Left" Margin="720,160,0,0" Grid.Row="1" VerticalAlignment="Top" Height="47" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,53,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Кдастровая стоимость" VerticalAlignment="Top"/>
+        <TextBox Name="cadpr_tb" HorizontalAlignment="Left" Margin="149,53,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <Button Content="назад" x:Name="back_btn1" Click="back_btn_Click" HorizontalAlignment="Left" Margin="720,160,0,0" Grid.Row="1" VerticalAlignment="Top" Height="47" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,96,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Рыночная стоимость" VerticalAlignment="Top"/>
+        <TextBox Name="marketpr_tb" HorizontalAlignment="Left" Margin="148,94,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,136,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Стоимость аренды" VerticalAlignment="Top"/>
+        <TextBox Name="rentpr_tb" HorizontalAlignment="Left" Margin="148,136,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Button Content="Внести изменения" HorizontalAlignment="Left" Margin="10,184,0,0" Grid.Row="1" VerticalAlignment="Top" Height="23" Width="113" Name="add_reprice_btn" Click="add_reprice_btn_Click"/>
+        <Button Name="check_money" Click="check_money_Click" Content="Просмотр прибыли" HorizontalAlignment="Left" Margin="148,184,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.227,0.803" Height="23" Width="115"/>
+    </Grid>
+
+</Window>

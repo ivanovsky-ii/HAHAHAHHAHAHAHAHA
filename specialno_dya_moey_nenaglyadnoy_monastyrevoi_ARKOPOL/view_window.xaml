@@ -1,0 +1,42 @@
+﻿<Window x:Class="specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL.view_window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL"
+        mc:Ignorable="d"
+        Title="view_window" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ListView Name="viewLV">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="номер квартиры" DisplayMemberBinding="{Binding id}"/>
+                    <GridViewColumn Header="этаж" DisplayMemberBinding="{Binding floor}"/>
+                    <GridViewColumn Header="квартира на этаже номер" DisplayMemberBinding="{Binding floor_apart}"/>
+                    <GridViewColumn Header="дата последнего действия" DisplayMemberBinding="{Binding date_build, StringFormat=dd/MM/yyyy}"/>
+                    <GridViewColumn Header="выход окна" DisplayMemberBinding="{Binding window.name}"/>
+                    <GridViewColumn Header="количество комнат" DisplayMemberBinding="{Binding amount_rooms}"/>
+                    <GridViewColumn Header="количество туалетов" DisplayMemberBinding="{Binding amount_toilet}"/>
+                    <GridViewColumn Header="тип туалета" DisplayMemberBinding="{Binding toilet_type.name}"/>
+                    <GridViewColumn Header="наличие кондиционер">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding have_cond}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="кадасторвая стоимость" DisplayMemberBinding="{Binding cad_price}"/>
+                    <GridViewColumn Header="рыночная стоимость" DisplayMemberBinding="{Binding market_price}"/>
+                    <GridViewColumn Header="стоимость аренды" DisplayMemberBinding="{Binding rent_price}"/>
+                    <GridViewColumn Header="статус квартиры" DisplayMemberBinding="{Binding status.name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <CheckBox Content="По цене" HorizontalAlignment="Left" Margin="190,15,0,0" Grid.Row="1" VerticalAlignment="Top" Name="price_filter" Checked="price_filter_Checked"/>
+        <CheckBox Content="Количество комнат" HorizontalAlignment="Left" Margin="342,15,0,0" Grid.Row="1" VerticalAlignment="Top" Name="amount_rooms_filter" Checked="amount_rooms_filter_Checked"/>
+    </Grid>
+</Window>
