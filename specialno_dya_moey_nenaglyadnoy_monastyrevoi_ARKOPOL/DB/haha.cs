@@ -12,24 +12,12 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class flat
+    public partial class haha
     {
-        public Nullable<int> floor { get; set; }
-        public Nullable<int> floor_apart { get; set; }
-        public Nullable<System.DateTime> date_build { get; set; }
-        public Nullable<int> window_placement { get; set; }
-        public Nullable<int> amount_rooms { get; set; }
-        public Nullable<int> amount_toilet { get; set; }
-        public Nullable<int> toilet_type { get; set; }
-        public Nullable<bool> have_cond { get; set; }
-        public Nullable<decimal> cad_price { get; set; }
-        public Nullable<decimal> market_price { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string adress { get; set; }
         public Nullable<decimal> rent_price { get; set; }
         public Nullable<int> flat_status { get; set; }
-        public string adress { get; set; }
-    
-        public virtual status status { get; set; }
-        public virtual toilet_type toilet_type1 { get; set; }
-        public virtual window window { get; set; }
     }
 }

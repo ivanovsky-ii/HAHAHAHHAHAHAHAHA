@@ -20,7 +20,7 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL
     /// </summary>
     public partial class add : Window
     {
-        flat f =new flat();
+        flat f = new flat();
         public add()
         {
             InitializeComponent();
@@ -46,6 +46,8 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL
                 f.market_price = Convert.ToDecimal(market_price_tb.Text);
                 f.rent_price = Convert.ToDecimal(rent_price_tb.Text);
                 f.flat_status = ((status)flat_status.SelectedItem).id;
+                f.adress = adres_tb.Text;
+                
 
 
                 conn.en.flat.Add(f);
@@ -62,7 +64,9 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL
                 cad_price_tb.Text = "";
                 conditer_chb.IsChecked = false;
                 market_price_tb.Text = "";
+                rent_price_tb.Text = "";
                 flat_status.Text = "";
+                adres_tb.Text = "";
             }
             catch
             {

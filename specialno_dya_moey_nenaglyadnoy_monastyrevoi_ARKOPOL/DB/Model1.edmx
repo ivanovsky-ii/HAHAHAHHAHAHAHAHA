@@ -4,12 +4,11 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище akroModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище akroModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="flat">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="adress" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="floor" Type="int" />
           <Property Name="floor_apart" Type="int" />
           <Property Name="date_build" Type="date" />
@@ -22,6 +21,7 @@
           <Property Name="market_price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="rent_price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="flat_status" Type="int" />
+          <Property Name="adress" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -61,6 +61,19 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "akro.dbo.haha" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="haha">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="adress" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rent_price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="flat_status" Type="int" />
         </EntityType>
         <Association Name="FK_flat_status">
           <End Role="status" Type="Self.status" Multiplicity="0..1" />
@@ -136,6 +149,15 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="toilet_type" EntityType="Self.toilet_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="window" EntityType="Self.window" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="haha" EntityType="Self.haha" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [haha].[id] AS [id], 
+    [haha].[name] AS [name], 
+    [haha].[adress] AS [adress], 
+    [haha].[rent_price] AS [rent_price], 
+    [haha].[flat_status] AS [flat_status]
+    FROM [dbo].[haha] AS [haha]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_flat_status" Association="Self.FK_flat_status">
             <End Role="status" EntitySet="status" />
             <End Role="flat" EntitySet="flat" />
@@ -149,129 +171,11 @@
             <End Role="flat" EntitySet="flat" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="akroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="flat">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="floor" Type="Int32" />
-          <Property Name="floor_apart" Type="Int32" />
-          <Property Name="date_build" Type="DateTime" Precision="0" />
-          <Property Name="window_placement" Type="Int32" />
-          <Property Name="amount_rooms" Type="Int32" />
-          <Property Name="amount_toilet" Type="Int32" />
-          <Property Name="toilet_type" Type="Int32" />
-          <Property Name="have_cond" Type="Boolean" />
-          <Property Name="cad_price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="market_price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="rent_price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="flat_status" Type="Int32" />
-          <NavigationProperty Name="status" Relationship="Self.FK_flat_status" FromRole="flat" ToRole="status" />
-          <NavigationProperty Name="toilet_type1" Relationship="Self.FK_flat_toilet_type" FromRole="flat" ToRole="toilet_type" />
-          <NavigationProperty Name="window" Relationship="Self.FK_flat_window" FromRole="flat" ToRole="window" />
-        </EntityType>
-        <EntityType Name="login">
-          <Key>
-            <PropertyRef Name="login1" />
-          </Key>
-          <Property Name="login1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="status">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="flat" Relationship="Self.FK_flat_status" FromRole="status" ToRole="flat" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="toilet_type">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="flat" Relationship="Self.FK_flat_toilet_type" FromRole="toilet_type" ToRole="flat" />
-        </EntityType>
-        <EntityType Name="window">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="flat" Relationship="Self.FK_flat_window" FromRole="window" ToRole="flat" />
-        </EntityType>
-        <Association Name="FK_flat_status">
-          <End Role="status" Type="Self.status" Multiplicity="0..1" />
-          <End Role="flat" Type="Self.flat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="status">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="flat">
-              <PropertyRef Name="flat_status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_flat_toilet_type">
-          <End Role="toilet_type" Type="Self.toilet_type" Multiplicity="0..1" />
-          <End Role="flat" Type="Self.flat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="toilet_type">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="flat">
-              <PropertyRef Name="toilet_type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_flat_window">
-          <End Role="window" Type="Self.window" Multiplicity="0..1" />
-          <End Role="flat" Type="Self.flat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="window">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="flat">
-              <PropertyRef Name="window_placement" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="akroEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="flat" EntityType="Self.flat" />
-          <EntitySet Name="login" EntityType="Self.login" />
-          <EntitySet Name="status" EntityType="Self.status" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="toilet_type" EntityType="Self.toilet_type" />
-          <EntitySet Name="window" EntityType="Self.window" />
-          <AssociationSet Name="FK_flat_status" Association="Self.FK_flat_status">
-            <End Role="status" EntitySet="status" />
-            <End Role="flat" EntitySet="flat" />
-          </AssociationSet>
-          <AssociationSet Name="FK_flat_toilet_type" Association="Self.FK_flat_toilet_type">
-            <End Role="toilet_type" EntitySet="toilet_type" />
-            <End Role="flat" EntitySet="flat" />
-          </AssociationSet>
-          <AssociationSet Name="FK_flat_window" Association="Self.FK_flat_window">
-            <End Role="window" EntitySet="window" />
-            <End Role="flat" EntitySet="flat" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -302,7 +206,26 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-        </EntityContainer>
+          <EntitySet Name="flat" EntityType="akroModel.flat" />
+          <EntitySet Name="login" EntityType="akroModel.login" />
+          <EntitySet Name="status" EntityType="akroModel.status" />
+          <EntitySet Name="sysdiagrams" EntityType="akroModel.sysdiagrams" />
+          <EntitySet Name="toilet_type" EntityType="akroModel.toilet_type" />
+          <EntitySet Name="window" EntityType="akroModel.window" />
+          <EntitySet Name="haha" EntityType="akroModel.haha" />
+          <AssociationSet Name="FK_flat_status" Association="akroModel.FK_flat_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="flat" EntitySet="flat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_flat_toilet_type" Association="akroModel.FK_flat_toilet_type">
+            <End Role="toilet_type" EntitySet="toilet_type" />
+            <End Role="flat" EntitySet="flat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_flat_window" Association="akroModel.FK_flat_window">
+            <End Role="window" EntitySet="window" />
+            <End Role="flat" EntitySet="flat" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -314,75 +237,122 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="flat">
+          <Key>
+            <PropertyRef Name="adress" />
+          </Key>
+          <Property Name="floor" Type="Int32" />
+          <Property Name="floor_apart" Type="Int32" />
+          <Property Name="date_build" Type="DateTime" Precision="0" />
+          <Property Name="window_placement" Type="Int32" />
+          <Property Name="amount_rooms" Type="Int32" />
+          <Property Name="amount_toilet" Type="Int32" />
+          <Property Name="toilet_type" Type="Int32" />
+          <Property Name="have_cond" Type="Boolean" />
+          <Property Name="cad_price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="market_price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="rent_price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="flat_status" Type="Int32" />
+          <Property Name="adress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="status" Relationship="akroModel.FK_flat_status" FromRole="flat" ToRole="status" />
+          <NavigationProperty Name="toilet_type1" Relationship="akroModel.FK_flat_toilet_type" FromRole="flat" ToRole="toilet_type" />
+          <NavigationProperty Name="window" Relationship="akroModel.FK_flat_window" FromRole="flat" ToRole="window" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="login1" />
+          </Key>
+          <Property Name="login1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="flat" Relationship="akroModel.FK_flat_status" FromRole="status" ToRole="flat" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="toilet_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="flat" Relationship="akroModel.FK_flat_toilet_type" FromRole="toilet_type" ToRole="flat" />
+        </EntityType>
+        <EntityType Name="window">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="flat" Relationship="akroModel.FK_flat_window" FromRole="window" ToRole="flat" />
+        </EntityType>
+        <EntityType Name="haha">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="adress" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rent_price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="flat_status" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_flat_status">
+          <End Type="akroModel.status" Role="status" Multiplicity="0..1" />
+          <End Type="akroModel.flat" Role="flat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flat">
+              <PropertyRef Name="flat_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_flat_toilet_type">
+          <End Type="akroModel.toilet_type" Role="toilet_type" Multiplicity="0..1" />
+          <End Type="akroModel.flat" Role="flat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="toilet_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flat">
+              <PropertyRef Name="toilet_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_flat_window">
+          <End Type="akroModel.window" Role="window" Multiplicity="0..1" />
+          <End Type="akroModel.flat" Role="flat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="window">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flat">
+              <PropertyRef Name="window_placement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище akroModelContainer" CdmEntityContainer="akroEntities">
-          <EntitySetMapping Name="flat">
-            <EntityTypeMapping TypeName="akroModel.flat">
-              <MappingFragment StoreEntitySet="flat">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="floor" ColumnName="floor" />
-                <ScalarProperty Name="floor_apart" ColumnName="floor_apart" />
-                <ScalarProperty Name="date_build" ColumnName="date_build" />
-                <ScalarProperty Name="window_placement" ColumnName="window_placement" />
-                <ScalarProperty Name="amount_rooms" ColumnName="amount_rooms" />
-                <ScalarProperty Name="amount_toilet" ColumnName="amount_toilet" />
-                <ScalarProperty Name="toilet_type" ColumnName="toilet_type" />
-                <ScalarProperty Name="have_cond" ColumnName="have_cond" />
-                <ScalarProperty Name="cad_price" ColumnName="cad_price" />
-                <ScalarProperty Name="market_price" ColumnName="market_price" />
-                <ScalarProperty Name="rent_price" ColumnName="rent_price" />
-                <ScalarProperty Name="flat_status" ColumnName="flat_status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="login">
-            <EntityTypeMapping TypeName="akroModel.login">
-              <MappingFragment StoreEntitySet="login">
-                <ScalarProperty Name="login1" ColumnName="login" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="role" ColumnName="role" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="status">
-            <EntityTypeMapping TypeName="akroModel.status">
-              <MappingFragment StoreEntitySet="status">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="akroModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="toilet_type">
-            <EntityTypeMapping TypeName="akroModel.toilet_type">
-              <MappingFragment StoreEntitySet="toilet_type">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="window">
-            <EntityTypeMapping TypeName="akroModel.window">
-              <MappingFragment StoreEntitySet="window">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище akroModel.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище akroModel.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище akroModel.sp_dropdiagram" />
@@ -407,7 +377,81 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище akroModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище akroModel.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="flat">
+            <EntityTypeMapping TypeName="akroModel.flat">
+              <MappingFragment StoreEntitySet="flat">
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="flat_status" ColumnName="flat_status" />
+                <ScalarProperty Name="rent_price" ColumnName="rent_price" />
+                <ScalarProperty Name="market_price" ColumnName="market_price" />
+                <ScalarProperty Name="cad_price" ColumnName="cad_price" />
+                <ScalarProperty Name="have_cond" ColumnName="have_cond" />
+                <ScalarProperty Name="toilet_type" ColumnName="toilet_type" />
+                <ScalarProperty Name="amount_toilet" ColumnName="amount_toilet" />
+                <ScalarProperty Name="amount_rooms" ColumnName="amount_rooms" />
+                <ScalarProperty Name="window_placement" ColumnName="window_placement" />
+                <ScalarProperty Name="date_build" ColumnName="date_build" />
+                <ScalarProperty Name="floor_apart" ColumnName="floor_apart" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="login">
+            <EntityTypeMapping TypeName="akroModel.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login1" ColumnName="login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="akroModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="akroModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="toilet_type">
+            <EntityTypeMapping TypeName="akroModel.toilet_type">
+              <MappingFragment StoreEntitySet="toilet_type">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="window">
+            <EntityTypeMapping TypeName="akroModel.window">
+              <MappingFragment StoreEntitySet="window">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="haha">
+            <EntityTypeMapping TypeName="akroModel.haha">
+              <MappingFragment StoreEntitySet="haha">
+                <ScalarProperty Name="flat_status" ColumnName="flat_status" />
+                <ScalarProperty Name="rent_price" ColumnName="rent_price" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

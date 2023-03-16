@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL"
         mc:Ignorable="d"
-        Title="view_window" Height="450" Width="800">
+        Title="view_window" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*" />
@@ -14,7 +14,7 @@
         <ListView Name="viewLV">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="номер квартиры" DisplayMemberBinding="{Binding id}"/>
+                    <GridViewColumn Header="адрес квартиры" DisplayMemberBinding="{Binding adress}"/>
                     <GridViewColumn Header="этаж" DisplayMemberBinding="{Binding floor}"/>
                     <GridViewColumn Header="квартира на этаже номер" DisplayMemberBinding="{Binding floor_apart}"/>
                     <GridViewColumn Header="дата последнего действия" DisplayMemberBinding="{Binding date_build, StringFormat=dd/MM/yyyy}"/>
@@ -36,7 +36,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <CheckBox Content="По цене" HorizontalAlignment="Left" Margin="190,15,0,0" Grid.Row="1" VerticalAlignment="Top" Name="price_filter" Checked="price_filter_Checked"/>
-        <CheckBox Content="Количество комнат" HorizontalAlignment="Left" Margin="342,15,0,0" Grid.Row="1" VerticalAlignment="Top" Name="amount_rooms_filter" Checked="amount_rooms_filter_Checked"/>
+        <TextBox Name="low_price_tb" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="low_price" VerticalAlignment="Center" Width="120"/>
+        <TextBox Name="high_price_tb" HorizontalAlignment="Left" Margin="135,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="high_price" VerticalAlignment="Center" Width="120"/>
+        <TextBox Name="high_amount_rooms_tb" HorizontalAlignment="Left" Margin="670,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="high_amount" VerticalAlignment="Center" Width="120"/>
+        <TextBox Name="low_amount_rooms" HorizontalAlignment="Left" Margin="545,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="low_amount" VerticalAlignment="Center" Width="120"/>
+        <Button Content="Сортировать" Name="sort_btn" Click="sort_btn_Click" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
+
+
     </Grid>
 </Window>

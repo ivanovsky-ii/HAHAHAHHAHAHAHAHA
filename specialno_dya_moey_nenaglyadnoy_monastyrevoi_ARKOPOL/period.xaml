@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL"
         mc:Ignorable="d"
-        Title="period" Height="350" Width="210">
+        Title="period" Height="350" Width="210" WindowStartupLocation="CenterScreen">
     <Grid>
         <DatePicker Name="start_period" SelectedDateChanged="start_period_SelectedDateChanged" HorizontalAlignment="Left" Margin="26,53,0,0" VerticalAlignment="Top"/>
         <DatePicker Name="end_period" SelectedDateChanged="end_period_SelectedDateChanged" HorizontalAlignment="Left" Margin="26,100,0,0" VerticalAlignment="Top"/>

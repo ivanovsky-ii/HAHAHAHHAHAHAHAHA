@@ -26,30 +26,22 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL
             viewLV.ItemsSource = conn.en.flat.ToList();
         }
 
-        
+       
 
-        private void price_filter_Checked(object sender, RoutedEventArgs e)
+        private void sort_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (price_filter.IsChecked == true)
-            {
-                viewLV.ItemsSource = conn.en.flat.OrderByDescending(o => o.cad_price).ToList();
-            }
-            else
-            {
-                viewLV.ItemsSource = conn.en.flat.ToList();
-            }
-        }
+            decimal low_price = Convert.ToDecimal(low_price_tb.Text);
+            decimal high_price = Convert.ToDecimal(high_price_tb.Text);
+            int low_amount_rooms = Convert
+            .ToInt32(low_price_tb.Text);
+            int high_amount_rooms = Convert
+            .ToInt32(high_amount_rooms_tb.Text);
 
-        private void amount_rooms_filter_Checked(object sender, RoutedEventArgs e)
-        {
-            if (amount_rooms_filter.IsChecked == true)
-            {
-                viewLV.ItemsSource = conn.en.flat.OrderByDescending(o => o.amount_rooms).ToList();
-            }
-            else
-            {
-                viewLV.ItemsSource = conn.en.flat.ToList();
-            }
+            viewLV.ItemsSource = conn.en.flat.Where(i => i.rent_price <= high_price && i.rent_price >= low_price && i.amount_rooms >= low_amount_rooms&& i.amount_rooms <= high_amount_rooms).OrderByDescending(i => i.rent_price).ToList();
+
+            //view_window w = new view_window();
+            //w.Show();
+            //this.Close();
         }
     }
 }

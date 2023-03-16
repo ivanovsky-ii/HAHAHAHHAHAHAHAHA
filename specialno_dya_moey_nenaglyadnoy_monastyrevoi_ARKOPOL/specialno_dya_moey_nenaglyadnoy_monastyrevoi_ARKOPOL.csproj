@@ -68,6 +68,9 @@
     <Compile Include="DB\flat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\haha.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\login.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

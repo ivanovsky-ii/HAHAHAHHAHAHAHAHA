@@ -33,6 +33,7 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL.DB
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<toilet_type> toilet_type { get; set; }
         public virtual DbSet<window> window { get; set; }
+        public virtual DbSet<haha> haha { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

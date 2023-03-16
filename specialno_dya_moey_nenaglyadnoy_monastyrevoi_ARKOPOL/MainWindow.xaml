@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Content="Авторизация" HorizontalAlignment="Center" Margin="0,379,0,0" VerticalAlignment="Top" Height="31" Width="126" Name="au_btn" Click="au_btn_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="89,112,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top"/>

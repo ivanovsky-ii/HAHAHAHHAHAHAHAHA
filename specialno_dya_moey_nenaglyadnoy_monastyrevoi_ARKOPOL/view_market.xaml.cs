@@ -26,7 +26,7 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL
         {
             InitializeComponent();
 
-            var status_in_lv = conn.en.status.Where(oo => oo.name == "свободна").Select(oo => oo.id).FirstOrDefault();
+            var status_in_lv = conn.en.status.Where(oo => oo.name == "арендована").Select(oo => oo.id).FirstOrDefault();
             view_market_agent.ItemsSource = conn.en.flat.Where(oo => oo.flat_status == status_in_lv).ToList();
         }
 
@@ -39,8 +39,8 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL
 
         private void add_reprice_btn_Click(object sender, RoutedEventArgs e)
         {
-            var selected = ((flat)view_market_agent.SelectedItem).id;
-            var flat = conn.en.flat.Where(u => u.id == selected).FirstOrDefault();
+            var selected = ((flat)view_market_agent.SelectedItem).adress;
+            var flat = conn.en.flat.Where(u => u.adress == selected).FirstOrDefault();
 
             flat.cad_price = Convert.ToDecimal(cadpr_tb.Text);
             flat.market_price = Convert.ToDecimal(marketpr_tb.Text);
@@ -48,14 +48,14 @@ namespace specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL
 
             conn.en.flat.AddOrUpdate(flat);
             conn.en.SaveChanges();
-            MessageBox.Show("расценка успешно обновлена");
+            MessageBox.Show("расценка успешно обновлена");   
         }
 
         private void view_market_agent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var cadprice_change = conn.en.flat.Where(i => i.id == ((flat)view_market_agent.SelectedItem).id).Select(i => i.cad_price).FirstOrDefault();
-            var marketprice_change = conn.en.flat.Where(i => i.id == ((flat)view_market_agent.SelectedItem).id).Select(i => i.market_price).FirstOrDefault();
-            var rentprice_change = conn.en.flat.Where(i => i.id == ((flat)view_market_agent.SelectedItem).id).Select(i => i.rent_price).FirstOrDefault();
+            var cadprice_change = conn.en.flat.Where(i => i.adress == ((flat)view_market_agent.SelectedItem).adress).Select(i => i.cad_price).FirstOrDefault();
+            var marketprice_change = conn.en.flat.Where(i => i.adress == ((flat)view_market_agent.SelectedItem).adress).Select(i => i.market_price).FirstOrDefault();
+            var rentprice_change = conn.en.flat.Where(i => i.adress == ((flat)view_market_agent.SelectedItem).adress).Select(i => i.rent_price).FirstOrDefault();
 
             cadpr_tb.Text = Convert.ToString(cadprice_change);
             marketpr_tb.Text = Convert.ToString(marketprice_change);

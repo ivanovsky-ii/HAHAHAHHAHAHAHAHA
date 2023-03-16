@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:specialno_dya_moey_nenaglyadnoy_monastyrevoi_ARKOPOL"
         mc:Ignorable="d"
-        Title="add" Height="450" Width="800">
+        Title="add" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox HorizontalAlignment="Left" Margin="192,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="floor_tb"/>
         <TextBox HorizontalAlignment="Left" Margin="192,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="floor_apat_tb"/>
@@ -56,6 +56,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="566,68,0,0" TextWrapping="Wrap" Text="Дата аренды" VerticalAlignment="Top"/>
         <Button Content="Добавить" HorizontalAlignment="Left" Margin="423,347,0,0" VerticalAlignment="Top" Height="40" Width="131" Name="add_new_record_button" Click="add_new_record_button_Click"/>
         <Button Content="Просмотр отчёта" HorizontalAlignment="Left" Margin="610,347,0,0" VerticalAlignment="Top" Height="40" Width="131" Name="go_to_view_btn" Click="go_to_view_btn_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,334,0,0" TextWrapping="Wrap" Text="адерс квартиры" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="192,332,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Name="adres_tb"/>
 
 
 
